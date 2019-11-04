@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/searchFragment">
+
+    <fragment
+        android:id="@+id/searchFragment"
+        android:name="com.jmj.musicsearch.presentation.search.ArtistSearchFragment"
+        android:label="Artist Search"
+        tools:layout="@layout/fragment_search">
+        <action
+            android:id="@+id/action_search_to_artist"
+            app:destination="@id/artistFragment"
+            app:enterAnim="@anim/slide_in_from_right"
+            app:exitAnim="@anim/slide_out_to_left"
+            app:popEnterAnim="@anim/slide_in_from_left"
+            app:popExitAnim="@anim/slide_out_to_right"
+            app:popUpTo="@id/searchFragment" />
+
+        <action
+            android:id="@+id/action_search_to_history"
+            app:destination="@+id/historyBottomSheet"
+            />
+    </fragment>
+
+    <dialog
+        android:id="@+id/historyBottomSheet"
+        android:name="com.jmj.musicsearch.presentation.history.ArtistHistoryBottomSheet"
+        android:label="Artist History"
+        tools:layout="@layout/fragment_history">
+
+        <action
+            android:id="@+id/action_history_to_artist"
+            app:destination="@id/artistFragment"
+            app:enterAnim="@anim/slide_in_from_right"
+            app:popEnterAnim="@anim/slide_in_from_left"
+            app:popExitAnim="@anim/slide_out_to_right" />
+    </dialog>
+
+    <fragment
+        android:id="@+id/artistFragment"
+        android:name="com.jmj.musicsearch.presentation.artist.ArtistFragment"
+        android:label="Artist Information"
+        tools:layout="@layout/fragment_artist">
+        <argument
+            android:name="artistId"
+            app:argType="string" />
+    </fragment>
+
+
+</navigation>
