@@ -1,6 +1,8 @@
 package com.jmj.musicsearch.domain.data.www
 
 import com.jmj.musicsearch.domain.data.www.model.Artist
+import com.jmj.musicsearch.domain.data.www.model.Release
+import com.jmj.musicsearch.domain.data.www.model.ReleasePage
 import com.jmj.musicsearch.domain.data.www.model.SearchResponse
 import io.reactivex.Observable
 import retrofit2.http.GET
@@ -24,4 +26,8 @@ interface MusicBrainzApi {
     @Path("mbid") id: String,
     @Query("inc") includes: String = "tags"
   ): Observable<Artist>
+  
+  @Headers("Accept:application/json; charset=UTF-8")
+  @GET("2/release")
+  fun getReleases(@Query("artist") artistUid: String): Observable<ReleasePage>
 }
