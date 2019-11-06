@@ -6,7 +6,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.jmj.musicsearch.R
+import com.jmj.musicsearch.domain.data.www.model.Release
 import com.jmj.musicsearch.frameworks.android.showLongSnackbar
 import com.jmj.musicsearch.frameworks.android.showShortSnackbar
 import com.jmj.musicsearch.frameworks.dagger.component.DaggerArtistComponent
@@ -32,7 +34,10 @@ class ArtistFragment : AppFragment<ArtistPresenter>(), ArtistView {
   
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
-    
+    discographyRecycler.apply {
+      layoutManager = LinearLayoutManager(context)
+      adapter = ReleaseAdapter()
+    }
     presenter.onViewCreated(this)
   }
   
@@ -63,6 +68,13 @@ class ArtistFragment : AppFragment<ArtistPresenter>(), ArtistView {
   override fun setEndDescription(endDesc: String) = runOnUiThread {
     this.end.isVisible = endDesc.isNotEmpty()
     this.end.text = endDesc
+  }
+  
+  private val releaseAdapter: ReleaseAdapter
+    get() = discographyRecycler.adapter as ReleaseAdapter
+  
+  override fun addReleases(releases: List<Release>) = runOnUiThread {
+    releaseAdapter.addAll(releases)
   }
   
   companion object {

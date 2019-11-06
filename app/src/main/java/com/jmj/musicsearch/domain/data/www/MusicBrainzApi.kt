@@ -29,5 +29,9 @@ interface MusicBrainzApi {
   
   @Headers("Accept:application/json; charset=UTF-8")
   @GET("2/release")
-  fun getReleases(@Query("artist") artistUid: String): Observable<ReleasePage>
+  fun getReleases(
+    @Query("artist") artistUid: String,
+    @Query("limit") limit: Int,
+    @Query("offset") offset: Int
+  ): Observable<ReleasePage>
 }

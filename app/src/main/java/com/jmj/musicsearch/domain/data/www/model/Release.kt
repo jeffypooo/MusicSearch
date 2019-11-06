@@ -5,7 +5,7 @@ import java.util.*
 data class Release(
   val id: String,
   val title: String,
-  val date: Date
+  val date: Date?
 )
 
 //val Release.year: Int
